@@ -2,6 +2,12 @@
 
 ## Getting Started
 
+### Description
+
+This project contains automated tests for demoblaze.com using Playwright, a modern end-to-end testing framework for web applications. The test suite verifies the core functionalities of the website, focusing on the following key areas:
+
+Test Coverage: - Authentication Tests: Validates user login, sign up, and logout functionalities. - Cart Tests: Ensures products can be added, and removed successfully. - Homepage Tests: Checks Get in touch section
+
 ### Prerequisites
 
 - **Node.js** (Latest stable version)

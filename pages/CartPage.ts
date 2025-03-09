@@ -18,6 +18,7 @@ export class CartPage {
 
   async clickHomePage() {
     await this.homePage.click();
+    await this.page.waitForTimeout(2000);
   }
 
   async clickCartPage() {

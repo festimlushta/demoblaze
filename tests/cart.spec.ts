@@ -25,6 +25,7 @@ test.describe("Cart item tests", () => {
     await app.CartPage.clickHomePage();
     await app.CartPage.clickCartItem("Samsung galaxy s6");
     await app.CartPage.clickAddToCartButton();
+    await app.CartPage.assertItemAddedToCart();
     await app.CartPage.clickHomePage();
     await app.CartPage.clickCartItem("Nokia lumia 1520");
     await app.CartPage.clickAddToCartButton();
