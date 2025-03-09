@@ -1,0 +1,87 @@
+# Playwright Testing for demoblaze.com
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** (Latest stable version)
+- **npm** (Latest stable version)
+
+Ensure you have **Node.js** installed by running:
+
+```shell
+node -v
+```
+
+Ensure **npm** is installed by running:
+
+```shell
+npm -v
+```
+
+### Installation
+
+1. **Clone the repository**:
+
+   ```shell
+   git clone https://github.com/festimlushta/demoblaze
+   ```
+
+2. **Navigate to the project directory**:
+
+   ```shell
+   cd demoblaze
+   ```
+
+3. **Install dependencies**:
+
+   ```shell
+   npm install
+   ```
+
+4. **Install Playwright and browsers**:
+
+   ```shell
+   npx playwright install
+   ```
+
+## Running the Tests
+
+To execute the Playwright test suite for **demoblaze.com**, run:
+
+```shell
+npx playwright test
+```
+
+## Running Tests in UI Mode
+
+For interactive debugging:
+
+```shell
+npx playwright test --ui
+```
+
+## Additional Playwright Commands
+
+- **Run tests with headed mode (see browser UI):**
+
+  ```shell
+  npx playwright test --headed
+  ```
+
+- **Run tests in a specific browser (e.g., Chrome):**
+
+  ```shell
+  npx playwright test --browser=chromium
+  ```
+
+- **Generate test report:**
+
+  ```shell
+  npx playwright show-report
+  ```
+
+## Notes
+
+- The Playwright configuration is stored in `playwright.config.js`. Modify it as needed.
+- Ensure demoblaze.com is accessible before running tests.

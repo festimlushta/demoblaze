@@ -36,7 +36,7 @@ const config: PlaywrightTestConfig = {
   use: {
     testIdAttribute: "data-test",
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
-    actionTimeout: 15000,
+    actionTimeout: 10000,
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: process.env.BASE_URL,
     viewport: { width: 1600, height: 1200 },

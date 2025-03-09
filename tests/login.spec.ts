@@ -1,5 +1,6 @@
 import { test } from "@playwright/test";
 import { App } from "../pages/App";
+import { userData } from "../data/userData";
 
 test.describe("Login Page Tests", () => {
   let app: App;
@@ -8,7 +9,7 @@ test.describe("Login Page Tests", () => {
     await page.goto("https://demoblaze.com/");
   });
 
-  test("Verify get in touch section displays correctly", async ({ page }) => {
-    await app.HomePage.assertGetInTouchSection();
+  test("Verify login with valid credentials", async ({ page }) => {
+    await app.LoginPage.login(userData.username, userData.password);
   });
 });

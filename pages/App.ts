@@ -1,6 +1,7 @@
 import { Page } from "@playwright/test";
 import { SignUpPage } from "./SignUpPage";
-import { AuthPage } from "./AuthPage";
+import { LoginPage } from "./LoginPage";
+import { HomePage } from "./HomePage";
 import { CartPage } from "./CartPage";
 
 export class App {
@@ -13,15 +14,15 @@ export class App {
     return new SignUpPage(this.page);
   }
 
-  public get AuthPage() {
-    return new AuthPage(this.page);
+  public get LoginPage() {
+    return new LoginPage(this.page);
+  }
+
+  public get HomePage() {
+    return new HomePage(this.page);
   }
 
   public get CartPage() {
     return new CartPage(this.page);
-  }
-
-  public get getInTouchSection(){
-    return new this.getInTouchSection(this.page);
   }
 }

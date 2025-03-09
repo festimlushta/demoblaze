@@ -1,18 +1,20 @@
 import { test } from "@playwright/test";
 import { App } from "../pages/App";
-import { userData } from "../data/userData";
 
-test.describe("Login Page Tests", () => {
-  test("Check if 2 equals 2", async ({ page }) => {
-    const app = new App(page);
-    await app.SignUpPage.checkEqual2();
+test.describe("SignUp Page Tests", () => {
+  let app: App;
+  test.beforeEach(async ({ page }) => {
+    app = new App(page);
+    await page.goto("https://demoblaze.com/");
   });
 
-  test.only("Check signup with valid credentials", async ({ page }) => {
-    const app = new App(page);
-    // await app.SignUpPage.clickSignUpModal();
+  test("Verify signup with random credentials", async ({ page }) => {
+    const randomUsername = Math.random().toString(36).substring(7);
+    const randomPassword = Math.random().toString(36).substring(7);
     await app.SignUpPage.assertSignUpForm();
-    await app.SignUpPage.fillUsernameInput('Test');
-    await app.SignUpPage.fillPasswordInput('Password');
+    await app.SignUpPage.fillUsernameInput(randomUsername);
+    await app.SignUpPage.fillPasswordInput(randomPassword);
+    await app.SignUpPage.clickSignUpButton();
+    await app.SignUpPage.assertSignUpMessage();
   });
 });

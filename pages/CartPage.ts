@@ -1,7 +1,9 @@
 import { Locator, Page, expect } from "@playwright/test";
+import { getAlertText } from "../utils/pageHelpers";
 
 export class CartPage {
   readonly page: Page;
+  readonly homePage: Locator;
   readonly cartPage: Locator;
   readonly addToCartButton: Locator;
   readonly placeOrderButton: Locator;
@@ -9,30 +11,71 @@ export class CartPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.cartPage = page.locator('text= Cart');
-    this.addToCartButton = page.locator('button:has-text("Add to cart")');
-    this.placeOrderButton = page.locator('button:has-text("Place Order")');
-    this.deleteProductButton = page.locator('button:has-text("Delete")');
+    this.homePage = page.locator(".nav-link >> text=Home");
+    this.cartPage = page.locator(".nav-link >> text=Cart");
+    this.addToCartButton = page.locator('a:has-text("Add to cart")');
   }
 
-  async addItemsToCart() {
-    // Go to the website
-    await this.page.goto("https://demoblaze.com/");
+  async clickHomePage() {
+    await this.homePage.click();
+  }
 
-    // Click on the first item
-    await this.page.click("text=Samsung galaxy s6");
+  async clickCartPage() {
+    await this.cartPage.click();
+  }
 
-    // Add the item to cart
-    await this.page.click("text=Add to cart");
+  async clickCartItem(productName: string) {
+    await this.page.click(`text=${productName}`);
+  }
 
-    const alertText = await new Promise<string>((resolve) => {
-      this.page.once("dialog", async (dialog) => {
-        resolve(dialog.message()); // Get the alert message
-        await dialog.accept(); // Accept the alert
-      });
-    });
+  async clickAddToCartButton() {
+    await this.addToCartButton.click();
+  }
 
-    // Validate the alert message
+  async clickPlaceOrderButton() {
+    await this.placeOrderButton.click();
+  }
+
+  async assertItemAddedToCart() {
+    const alertText = await getAlertText(this.page);
     expect(alertText).toBe("Product added.");
+  }
+
+  async assertItemAddedToCartWithoutLoggingIn() {
+    const alertText = await getAlertText(this.page);
+    expect(alertText).toBe("Product added");
+  }
+
+  async verifyCartProductsOnCartPage(products: string[]) {
+    await this.clickCartPage();
+    for (const product of products) {
+      await expect(
+        this.page.locator(`.success >> text=${product}`)
+      ).toBeVisible();
+    }
+  }
+
+  async deleteAllProducts() {
+    await this.clickCartPage();
+    // wait for products to load
+    await this.page.waitForTimeout(2000);
+    let deleteProductButtons = this.page.locator('text="Delete"');
+
+    while ((await deleteProductButtons.count()) > 0) {
+      await deleteProductButtons.first().click();
+      // wait for products to load
+      await this.page.waitForTimeout(2000);
+    }
+  }
+
+  async deleteProduct(productName: string) {
+    await this.clickCartPage();
+    // wait for products to load
+    await this.page.waitForTimeout(2000);
+    await this.page.click(
+      `text=${productName} >> xpath=//following-sibling::td/a`
+    );
+    // wait for product to be deleted
+    await this.page.waitForTimeout(2000);
   }
 }
