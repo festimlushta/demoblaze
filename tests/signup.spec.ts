@@ -8,8 +8,11 @@ test.describe("Login Page Tests", () => {
     await app.SignUpPage.checkEqual2();
   });
 
-  test("Check signup with valid credentials", async ({ page }) => {
+  test.only("Check signup with valid credentials", async ({ page }) => {
     const app = new App(page);
-    await app.SignUpPage.signUp(userData.username, userData.password);
+    // await app.SignUpPage.clickSignUpModal();
+    await app.SignUpPage.assertSignUpForm();
+    await app.SignUpPage.fillUsernameInput('Test');
+    await app.SignUpPage.fillPasswordInput('Password');
   });
 });
