@@ -69,7 +69,6 @@ export class LoginPage {
   }
 
   async login(username: string, password: string) {
-    // Click on the login button
     await this.clickLoginModal();
 
     // Fill in username and password
@@ -82,7 +81,6 @@ export class LoginPage {
 
   async logout() {
     await this.page.click("#logout2");
-    // wait for the user to logout
     await this.page.waitForTimeout(2000);
     await expect(this.loggedInUser).not.toBeVisible();
   }

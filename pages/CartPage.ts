@@ -58,7 +58,6 @@ export class CartPage {
 
   async deleteAllProducts() {
     await this.clickCartPage();
-    // wait for products to load
     await this.page.waitForTimeout(2000);
     let deleteProductButtons = this.page.locator('text="Delete"');
 
@@ -71,7 +70,6 @@ export class CartPage {
 
   async deleteProduct(productName: string) {
     await this.clickCartPage();
-    // wait for products to load
     await this.page.waitForTimeout(2000);
     await this.page.click(
       `text=${productName} >> xpath=//following-sibling::td/a`

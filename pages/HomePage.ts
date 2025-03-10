@@ -6,16 +6,13 @@ export class HomePage {
 
   constructor(page: Page) {
     this.page = page;
-    // get the wrapper div of the Get in Touch section
     this.getInTouchSection = page
       .locator(".caption:has-text('Get in Touch')")
       .locator("../..");
   }
 
   async assertGetInTouchSection() {
-    // wait for the page to load
     await this.page.waitForTimeout(2000);
-    // scroll at the bottom of the page
     await this.page.evaluate(() => {
       window.scrollTo(0, document.body.scrollHeight);
     });
